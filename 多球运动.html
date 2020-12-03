@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin:0px;
+            padding:0px;
+        }
+       body{
+           background-color:#c0c0c0;
+       }
+       .box{
+            position: absolute;
+            left:0;
+            top:0;
+            width:50px;
+            height:50px;
+            background-color: #f90;
+            border-radius: 50%;
+       }
+    </style>
+</head>
+<body>
+    <!-- <div id="box"></div> -->
+    <script>
+        var speed;
+        run(10)
+        function run(num){
+            for(var i = 0 ; i< num;i++){
+                //创建div元素
+                // btn[i].index = i;
+                //muyu.height = 175
+                //candy.height = 180
+                //candy.home
+                //candy.niu
+                var div = document.createElement("div");
+                // console.log('tag', i,div);
+                // /给每个元素加类名
+                div.className = 'box';
+                div.speedX = Math.floor(Math.random()*20 + 1 ); 
+                div.speedY = Math.floor(Math.random()*20 + 1 ); 
+                // div.speedX = 1
+                // div.speedY = 1
+                // div.innerHTML = i;
+                    // console.log( div.speedX )
+                document.body.appendChild( div );
+            }
+            // console.log( div )
+            var box = document.getElementsByClassName('box');
+            maxX = document.documentElement.clientWidth - box[0].offsetWidth;
+            maxY = document.documentElement.clientHeight - box[0].offsetHeight;
+            // console.log( box )
+            // console.log( box[0].offsetHeight )
+            window.onresize = function(){
+                maxX = document.documentElement.clientWidth - box[0].offsetWidth;
+                maxY = document.documentElement.clientHeight - box[0].offsetHeight;
+            }
+            
+            play();
+            function play(){
+
+                for( var i =0 ;i<num;i++ ){
+                    var ball = box[i];
+                    var startTop = ball.offsetTop;
+                    var startLeft = ball.offsetLeft;
+                    Top = startTop + ball.speedY;
+                    Left = startLeft + ball.speedX;
+
+                    if( Top <= 0 || Top >= maxY ){
+                        ball.speedY = -ball.speedY;//改变小球的方向
+                        Top = Math.max( 0 , Top );
+                        Top = Math.min( Top , maxY ) ; //超出边界 100  110  99
+                        
+                    }
+                    // console.log('tag',Top );
+                    if( Left <= 0 || Left >= maxX ){
+                        ball.speedX = -ball.speedX;//改变小球的方向
+                        Left = Math.max( 0 , Left );
+                        Left = Math.min( Left , maxX );  //超出边界 100  110  99
+                        
+                    }
+                    ball.style.left = Left + 'px';
+                    ball.style.top = Top + 'px';
+                    ball.style.backgroundColor = rgba()
+                    
+                }
+                
+                requestAnimationFrame( play )
+            }
+            
+        }
+        function rgba(){
+            return `rgba( ${Math.floor(Math.random()*256)} , ${Math.floor(Math.random()*256)} , ${Math.floor(Math.random()*256)},${Math.random().toFixed(1)} )`
+        }
+    </script>
+</body>
+</html>
